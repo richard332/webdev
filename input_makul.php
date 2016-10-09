@@ -170,7 +170,7 @@
                     console.log(data.hasil.hasilbaris);
                     $('#error').removeClass('alert-danger').addClass('show alert alert-success');
                     $('#error').html(data.message);
-                    var h = "<tr><td>"+data.hasil.hasilbaris+"</td><td>"+data.hasil.kdmk+"</td><td>"+data.hasil.kdmakul+"</td><td><a href=deletemakul.php?kdmk="+data.hasil.kdmk+" class='btn btn-danger' role='button'><i class='fa fa-trash' aria-hidden='true'></i></a>"+' '+"<a href=editmakul.php?kdmk="+data.hasil.kdmk+" class='btn btn-info' role='button'>Edit</a></td></tr>"
+                    var h = "<tr><td>"+data.hasil.hasilbaris+"</td><td>"+data.hasil.kdmk+"</td><td>"+data.hasil.kdmakul+"</td><td><a href=deletemakul.php?kdmk="+data.hasil.kdmk+" class='btn btn-danger' role='button'><i class='fa fa-trash' aria-hidden='true'></i></a>"+' '+"<a href=input_makul.php?kdmk="+data.hasil.kdmk+" class='btn btn-info' role='button'>Edit</a></td></tr>"
 
                     $('#showMakul').append(h);
                     window.location = 'input_makul.php'; // redirect a user to another page
@@ -178,7 +178,7 @@
                   console.log(data.hasil.hasilbaris);
                   $('#error').removeClass('alert-danger').addClass('show alert alert-success');
                   $('#error').html(data.message);
-                  var h = "<tr><td>"+data.hasil.hasilbaris+"</td><td>"+data.hasil.kdmk+"</td><td>"+data.hasil.kdmakul+"</td><td><a href=deletemakul.php?kdmk="+data.hasil.kdmk+" class='btn btn-danger' role='button'><i class='fa fa-trash' aria-hidden='true'></i></a>"+' '+"<a href=editmakul.php?kdmk="+data.hasil.kdmk+" class='btn btn-info' role='button'>Edit</a></td></tr>"
+                  var h = "<tr><td>"+data.hasil.hasilbaris+"</td><td>"+data.hasil.kdmk+"</td><td>"+data.hasil.kdmakul+"</td><td><a href=deletemakul.php?kdmk="+data.hasil.kdmk+" class='btn btn-danger' role='button'><i class='fa fa-trash' aria-hidden='true'></i></a>"+' '+"<a href=input_makul.php?kdmk="+data.hasil.kdmk+" class='btn btn-info' role='button'>Edit</a></td></tr>"
 
                   $('#showMakul').append(h);
 
