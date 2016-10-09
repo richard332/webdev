@@ -26,7 +26,7 @@
                  <ul class="dropdown-menu">
                    <li><a href="showkota.php">Input Kota</a></li>
                    <li><a href="inputprodgi.php">Input Progdi</a></li>
-                   <li><a href="#">Mata Kuliah</a></li>
+                   <li><a href="input_makul.php">Mata Kuliah</a></li>
                  </ul>
                </li>
 
@@ -108,7 +108,7 @@
 
            })
            .done(function(data){
-             
+
              $('#kontent').html(data);
            })
            .fail(function(data){
