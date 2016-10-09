@@ -30,7 +30,7 @@
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data utama</a>
              <ul class="dropdown-menu">
                <li><a href="showkota.php">Input Kota</a></li>
-               <li><a href="showprogdi.php">Input Progdi</a></li>
+               <li><a href="inputprodgi.php">Input Progdi</a></li>
                <li><a href="#">Mata Kuliah</a></li>
              </ul>
            </li>
@@ -50,15 +50,15 @@
     <div class="container">
 
       <div class="page-header">
-        <h1>Data KOTA</h1>
+        <h1>Data Program Studi</h1>
       </div>
-      <a href="input_kota.php" class='btn btn-warning pull-right m-b-1em'>
-             <span class='glyphicon glyphicon-plus'></span>Input Kota
+      <a href="inputprodgi.php" class='btn btn-warning pull-right m-b-1em'>
+             <span class='glyphicon glyphicon-plus'></span>Input Progdi
          </a>
       <?php
       require_once('config.php');
       $mysqli = openConnection();
-      $query = "select * from kota_15n10020";
+      $query = "select * from progdi_n10020";
       $result = $mysqli->query($query) or die ("Query Salah");
 
       echo "<table class='table table-hover table-bordered table-responsive'>
@@ -67,6 +67,7 @@
           <th>Kode kota</th>
           <th>Kota</th>
           <th>Option</th>
+
         </tr>";
       if($result){
         $i =0;
@@ -74,10 +75,10 @@
           $i++;
           echo "<tr>
                   <td>$i</td>
-                  <td>$row->kodekota</td>
-                  <td>$row->kota</td>
-                  <td><a href=delete.php?kodekota=$row->kodekota class='btn btn-danger' role='button'><i class='fa fa-trash' aria-hidden='true'></i></a>;
-                  <a href=edit.php?kodekota=$row->kodekota class='btn btn-info' role='button'>Edit</a>
+                  <td>$row->kodeprogdi</td>
+                  <td>$row->progdi</td>
+                  <td><a href=deleteprogdi.php?kodeprogdi=$row->kodeprogdi class='btn btn-danger' role='button'><i class='fa fa-trash' aria-hidden='true'></i></a>;
+                  <a href=editprogdi.php?kodeprogdi=$row->kodeprogdi class='btn btn-info' role='button'>Edit</a>
 
                 </tr>";
         }

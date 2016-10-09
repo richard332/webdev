@@ -24,8 +24,8 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data utama</a>
                 <ul class="dropdown-menu">
-                  <li><a href="input_kota.php">Input Kota</a></li>
-                  <li><a href="inputprodgi.php">Input Progdi</a></li>
+                  <li><a href="showkota.php">Input Kota</a></li>
+                  <li><a href="showprogdi.php">Input Progdi</a></li>
                   <li><a href="#">Mata Kuliah</a></li>
                 </ul>
               </li>
@@ -43,9 +43,15 @@
         </nav>
 
         <div class="container">
+          <div class="page-header">
+            <h1>Proses Input Kota</h1>
+          </div>
           <div class="row">
             <div class="col-md-4">
-              <form class="form-horizontal" action="proseskota.php" method="post">
+              <div class="alert alert-danger hide" id="error">
+
+              </div>
+              <form class="form-horizontal" id="formKota" method="post">
                 <div class="form-group">
                   <label class="control-label col-md-4">Kode Kota:</label>
                     <div class="col-md-8">
@@ -76,6 +82,37 @@
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <script>
+          $(document).ready(function() {
+            $('#error').removeClass('alert danger').removeClass('alert-success');
+            $('#formKota').submit(function(event){
+              $.ajax({
+                type : 'POST',
+                url : 'proseskota.php',
+                data : $('#formKota').serialize(),
+                dataType : 'json',
+                encode : true
+              })
+              .done(function(data){
+                console.log(data);
 
+                if(!data.success){
+                  if(data.errors.kodekota_exist){
+                    $('#error').removeClass('hide').addClass('alert alert-danger').html(data.errors.kodekota_exist);
+                  }
+                }
+                else{
+                  $('#error').removeClass('alert-danger').addClass('show alert alert-success');
+                  $('#error').html(data.message);
+                }
+              })
+
+              .fail(function(data){
+                console.log(data);
+              });
+              event.preventDefault();
+            })
+          })
+        </script>
   </body>
 </html>
