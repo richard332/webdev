@@ -24,8 +24,8 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data utama</a>
                 <ul class="dropdown-menu">
-                  <li><a href="showkota.php">Input Kota</a></li>
-                  <li><a href="showprogdi.php">Input Progdi</a></li>
+                  <li><a href="showkota.php">Kota</a></li>
+                  <li><a href="showprogdi.php">Progdi</a></li>
                   <li><a href="input_makul.php">Mata Kuliah</a></li>
                 </ul>
               </li>
@@ -131,7 +131,40 @@
             </div> <!--akhir kolom 4-->
 
             <div class="col-md-8" id="hasil">
+              <?php
+                require_once('config.php');
+                $mysqli = openConnection();
+                $sql2 = "SELECT * from datasiswa_n10020";
+                $result = $mysqli->query($sql2) or die ("Query Salah");
+                        $mysqli->close();
+                        echo "<table class='table table-hover table-bordered table-responsive'>
+                          <tr>
+                            <th>No</th>
+                            <th>Kode Siswa</th>
+                            <th>Nama</th>
+                            <th>Alamat</th>
+                            <th>Kode Kota</th>
+                            <th>Kode Progdi</th>
+                            <th>Option</th>
+                          </tr>";
+                        if($result){
+                          $i =0;
+                          while($row = $result->fetch_object()){
+                            $i++;
+                            echo "<tr>
+                                    <td>$i</td>
+                                    <td>$row->kodesiswa</td>
+                                    <td>$row->nama</td>
+                                    <td>$row->alamat</td>
+                                    <td>$row->kodekota</td>
+                                    <td>$row->kodeprogdi</td>
+                                    <td><a href=delete.php?kodekota=$row->kodesiswa class='btn btn-danger' role='button'><i class='fa fa-trash' aria-hidden='true'></i></a>;
+                                    <a href=edit.php?kodekota=$row->kodesiswa class='btn btn-info' role='button'>Edit</a>
 
+                                  </tr>";
+                          }
+                        }
+               ?>
             </div>
           </div>
         </div>
@@ -157,18 +190,24 @@
                 if(data=="kodesiswa tidak boleh kosong"){
                     $('#error').removeClass('hide').addClass('alert alert-danger').html(data);
                 }
-                if(data=="nama tidak boleh kosong"){
+                else if(data=="nama tidak boleh kosong"){
                     $('#error').removeClass('hide').addClass('alert alert-danger').html(data);
                 }
-                if(data=="Data sudah ada"){
+                else if(data=="Data sudah ada"){
                     $('#error').removeClass('hide').addClass('alert alert-danger').html(data);
                 }
-                if(data=="alamat tidak boleh kosong"){
+                else if(data=="alamat tidak boleh kosong"){
                     $('#error').removeClass('hide').addClass('alert alert-danger').html(data);
+                }
+                else if(data=="2"){
+                  $('#error').removeClass('hide').addClass('alert alert-danger').html("Kode Kota Tidak Boleh Kosong");
+                }
+                else if(data=="3"){
+                  $('#error').removeClass('hide').addClass('alert alert-danger').html("Kode Progdi tidak boleh kosong");
                 }
                 else{
                   $('#error').removeClass('alert-danger').addClass('show alert alert-success');
-                  // $('#error').html(data);
+                  $('#error').html("Selamat Ya..!");
                   $('#hasil').html(data);
                 }
               })

@@ -27,6 +27,10 @@ else if($nama == ""){
 }
 else if($alamat == ""){
   echo "alamat tidak boleh kosong";
+}else if($kodekota == ""){
+  echo "2";
+}else if($kodeprogdi ==""){
+  echo "3";
 }else{
   $sql = "INSERT INTO datasiswa_n10020(kodesiswa, nama, alamat, kodekota, kodeprogdi)
           VALUES ('$kodesiswa','$nama','$alamat','$kodekota','$kodeprogdi')";

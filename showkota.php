@@ -29,8 +29,8 @@
              <li class="dropdown">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data utama</a>
              <ul class="dropdown-menu">
-               <li><a href="showkota.php">Input Kota</a></li>
-               <li><a href="showprogdi.php">Input Progdi</a></li>
+               <li><a href="showkota.php">Kota</a></li>
+               <li><a href="showprogdi.php">Progdi</a></li>
                <li><a href="input_makul.php">Mata Kuliah</a></li>
              </ul>
            </li>
@@ -38,7 +38,7 @@
            <li class="dropdown">
              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transaksi</a>
            <ul class="dropdown-menu">
-             <li><a href="input_kota.php"><i class="fa fa-html5 fa-1x"></i>Data Siswa</a></li>
+             <li><a href="datasiswa.php"><i class="fa fa-html5 fa-1x"></i>Data Siswa</a></li>
              <li><a href="inputprodgi.php">KRS</a></li>
            </ul>
          </li>
