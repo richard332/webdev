@@ -2,34 +2,34 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Input Kota</title>
+    <title>Input KRS</title>
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
     <?php
     require_once('config.php');
-    if(isset($_GET['kodesiswa'])){
+    if(isset($_GET['th']) && isset($_GET['smt']) && isset($_GET['kdw']) && isset($_GET['kdmk'])){
       $mysqli = openConnection();
-      $patokan = $_GET['kodesiswa'];
-      $sql = "select * from datasiswa_n10020 where kodesiswa='$patokan'";
+      $patokan = $_GET['th'];
+      $smt = $_GET['smt'];
+      $kdw = $_GET['kdw'];
+      $kdmk = $_GET['kdmk'];
+      $sql = "select * from krs_n10020 where tahun='$patokan' and smt='$smt' and kodesiswa='$kdw' and kodemk='$kdmk'";
       $result = $mysqli->query($sql);
       $status = "2";
       while($row = $result->fetch_object()){
-        $kodesiswa = $row->kodesiswa;
-        $nama = $row->nama;
-        $alamat = $row->alamat;
-        $alamat = $row->alamat;
-        $kodekota = $row->kodekota;
-        $kodeprogdi = $row->kodeprogdi;
+        $th = $row->tahun;
+        $smt = $row->smt;
+        $kdsw = $row->kodesiswa;
+        $kdmk = $row->kodemk;
       }
     }else{
       $status = "1";
-      $kodesiswa = null;
-      $nama = null;
-      $alamat = null;
-      $kodekota = null;
-      $kodeprogdi = null;
+      $th = null;
+      $kdsw = null;
+      $smt = null;
+      $kdmk = null;
     }
      ?>
     <nav class="navbar navbar-default">
@@ -59,7 +59,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transaksi</a>
               <ul class="dropdown-menu">
                 <li><a href="datasiswa.php"><i class="fa fa-html5 fa-1x"></i>Data Siswa</a></li>
-                <li><a href="#">KRS</a></li>
+                <li><a href="krs.php">KRS</a></li>
               </ul>
             </li>
               </ul>
@@ -69,7 +69,7 @@
 
         <div class="container">
           <div class="page-header">
-            <h1>Proses Input Data Siswa</h1>
+            <h1>Proses Input Data KRS</h1>
           </div>
           <div class="row">
             <div class="col-md-4">
@@ -78,48 +78,48 @@
               </div>
               <form class="form-horizontal" id="formKota" method="post">
                 <div class="form-group">
-                  <label class="control-label col-md-4">Kode Siswa:</label>
+                  <label class="control-label col-md-4">Tahun:</label>
                     <div class="col-md-8">
                     <div class="input-group">
-                      <input type="text" class="form-control" value="<?php echo $kodesiswa;?>" name="kodesiswa"placeholder="Kode Siswa">
+                      <input type="text" class="form-control date-picker-year" value="<?php echo $th;?>" name="tahun" placeholder="Tahun">
                     </div>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-md-4">Nama :</label>
+                  <label class="control-label col-md-4">Semester :</label>
                     <div class="col-md-8">
                     <div class="input-group">
-                      <input type="text" class="form-control has-error" value="<?php echo $nama; ?>" name="namasiswa" placeholder="Nama">
+                      <input type="text" class="form-control" value="<?php echo $smt;?>" name="smt" placeholder="Semester">
                     </div>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-md-4">Alamat :</label>
+                  <label class="control-label col-md-4">Kode Siswa :</label>
                     <div class="col-md-8">
                     <div class="input-group">
-                      <input type="text" class="form-control has-error" value="<?php echo $alamat; ?>" name="alamat" placeholder="alamat">
+                      <input type="text" class="form-control has-error" value="<?php echo $kdsw;?>" name="kodesiswa" placeholder="Kode Siswa">
                     </div>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-md-4">Kode Kota :</label>
+                  <label class="control-label col-md-4">Kode MK :</label>
                     <div class="col-md-8">
                     <div class="input-group">
-                      <select class="form-control" name="kodekota">
+                      <select class="form-control" name="kodemk">
                         <option selected="" value="">Pilih</option>
                         <?php
                         require_once('config.php');
                         $mysqli = openConnection();
-                        $sql = "SELECT * from kota_15n10020";
+                        $sql = "SELECT * from matakuliah_n10020";
                         $result = $mysqli->query($sql);
                         while($row = $result->fetch_object()){
-                          if($kodekota==$row->kodekota){
-                            echo "<option value='$row->kodekota' selected>$row->kodekota</option>";
+                          if($kdmk==$row->kodemk){
+                            echo "<option value='$row->kodemk' selected>$row->kodemk</option>";
                           }else{
-                            echo "<option value='$row->kodekota'>$row->kodekota</option>";
+                            echo "<option value='$row->kodemk'>$row->kodemk</option>";
                           }
                         }
                         $mysqli->close();
@@ -128,32 +128,6 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="form-group">
-                  <label class="control-label col-md-4">Kode Progdi :</label>
-                    <div class="col-md-8">
-                    <div class="input-group">
-                      <select class="form-control" name="kodeprogdi">
-                        <option selected="" value="">Pilih</option>
-                        <?php
-                        // require_once('config.php');
-                        $mysqli = openConnection();
-                        $sql = "SELECT * from progdi_n10020";
-                        $result = $mysqli->query($sql);
-                        while($row = $result->fetch_object()){
-                          if($kodeprogdi==$row->kodeprogdi){
-                            echo "<option value='$row->kodeprogdi' selected>$row->kodeprogdi</option>";
-                          }else{
-                            echo "<option value='$row->kodeprogdi'>$row->kodeprogdi</option>";
-                          }
-                        }
-                        $mysqli->close();
-                         ?>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
 
                 <div class="form-group">
                   <div class="col-md-offset-5">
@@ -161,7 +135,10 @@
                       if($status=="1"){
                         echo "<button type='submit' class='btn btn-success'>Add</button>";
                       }else{
-                        echo "<input type='hidden' name='key' value='$kodesiswa'>";
+                        $kdsw =base64_encode($kdsw);
+                        $kdmk = base64_encode($kdmk);
+                        echo "<input type='hidden' name='key' value='$kdsw'>";
+                        echo "<input type='hidden' name='key2' value='$kdmk'>";
                         echo "<button type='submit' class='btn btn-success'>Update</button>";
                       }
                      ?>
@@ -175,17 +152,16 @@
               <?php
                 require_once('config.php');
                 $mysqli = openConnection();
-                $sql2 = "SELECT * from datasiswa_n10020";
+                $sql2 = "SELECT * from krs_n10020";
                 $result = $mysqli->query($sql2) or die ("Query Salah");
                         $mysqli->close();
                         echo "<table class='table table-hover table-bordered table-responsive'>
                           <tr>
                             <th>No</th>
+                            <th>Tahun</th>
+                            <th>Semester</th>
                             <th>Kode Siswa</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>Kode Kota</th>
-                            <th>Kode Progdi</th>
+                            <th>Kode MK</th>
                             <th>Option</th>
                           </tr>";
                         if($result){
@@ -194,13 +170,12 @@
                             $i++;
                             echo "<tr>
                                     <td>$i</td>
+                                    <td>$row->tahun</td>
+                                    <td>$row->smt</td>
                                     <td>$row->kodesiswa</td>
-                                    <td>$row->nama</td>
-                                    <td>$row->alamat</td>
-                                    <td>$row->kodekota</td>
-                                    <td>$row->kodeprogdi</td>
-                                    <td><a href=deletesiswa.php?kodesiswa=$row->kodesiswa class='btn btn-danger' role='button'><i class='fa fa-trash' aria-hidden='true'></i></a>
-                                    <a href=datasiswa.php?kodesiswa=$row->kodesiswa class='btn btn-info' role='button'>Edit</a>
+                                    <td>$row->kodemk</td>
+                                    <td><a href='#' class='btn btn-danger' role='button'><i class='fa fa-trash' aria-hidden='true'></i></a>
+                                    <a href=krs.php?th=$row->tahun&smt=$row->smt&kdw=$row->kodesiswa&kdmk=$row->kodemk class='btn btn-info' role='button'>Edit</a>
 
                                   </tr>";
                           }
@@ -220,7 +195,7 @@
             $('#formKota').submit(function(event){
               $.ajax({
                 type : 'POST',
-                url : 'pros_daswa.php',
+                url : 'pros_krs.php',
                 data : $('#formKota').serialize(),
                 dataType : 'html'
 
@@ -228,17 +203,17 @@
               .done(function(data){
                 console.log(data);
 
-                if(data=="kodesiswa tidak boleh kosong"){
-                    $('#error').removeClass('hide').addClass('alert alert-danger').html(data);
+                if(data=="th"){
+                    $('#error').removeClass('hide').addClass('alert alert-danger').html("Tahun kosong");
                 }
-                else if(data=="nama tidak boleh kosong"){
-                    $('#error').removeClass('hide').addClass('alert alert-danger').html(data);
+                else if(data=="smt"){
+                    $('#error').removeClass('hide').addClass('alert alert-danger').html("Semester Kosong");
                 }
-                else if(data=="Data sudah ada"){
-                    $('#error').removeClass('hide').addClass('alert alert-danger').html(data);
+                else if(data=="kdsw"){
+                    $('#error').removeClass('hide').addClass('alert alert-danger').html("KDSW Kkosong");
                 }
-                else if(data=="alamat tidak boleh kosong"){
-                    $('#error').removeClass('hide').addClass('alert alert-danger').html(data);
+                else if(data=="kdmk"){
+                    $('#error').removeClass('hide').addClass('alert alert-danger').html("KDMK Kosong");
                 }
                 else if(data=="2"){
                   $('#error').removeClass('hide').addClass('alert alert-danger').html("Kode Kota Tidak Boleh Kosong");
