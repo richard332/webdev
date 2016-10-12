@@ -35,7 +35,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transaksi</a>
             <ul class="dropdown-menu">
               <li><a href="datasiswa.php"><i class="fa fa-html5 fa-1x"></i>Data Siswa</a></li>
-              <li><a href="#">KRS</a></li>
+              <li><a href="krs.php">KRS</a></li>
             </ul>
           </li>
 

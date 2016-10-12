@@ -59,9 +59,18 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transaksi</a>
               <ul class="dropdown-menu">
                 <li><a href="datasiswa.php"><i class="fa fa-html5 fa-1x"></i>Data Siswa</a></li>
-                <li><a href="#">KRS</a></li>
+                <li><a href="krs.php">KRS</a></li>
               </ul>
             </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tampil</a>
+            <ul class="dropdown-menu">
+              <li><a href="soal6/"><i class="fa fa-html5 fa-1x"></i>Soal 6</a></li>
+              <li><a href="soal7/">Soal 7</a></li>
+              <li><a href="soal8/">Soal 8</a></li>
+            </ul>
+          </li>
               </ul>
             </div>
           </div>
@@ -117,9 +126,9 @@
                         $result = $mysqli->query($sql);
                         while($row = $result->fetch_object()){
                           if($kodekota==$row->kodekota){
-                            echo "<option value='$row->kodekota' selected>$row->kodekota</option>";
+                            echo "<option value='$row->kodekota' selected>$row->kota</option>";
                           }else{
-                            echo "<option value='$row->kodekota'>$row->kodekota</option>";
+                            echo "<option value='$row->kodekota'>$row->kota</option>";
                           }
                         }
                         $mysqli->close();
@@ -142,9 +151,9 @@
                         $result = $mysqli->query($sql);
                         while($row = $result->fetch_object()){
                           if($kodeprogdi==$row->kodeprogdi){
-                            echo "<option value='$row->kodeprogdi' selected>$row->kodeprogdi</option>";
+                            echo "<option value='$row->kodeprogdi' selected>$row->progdi</option>";
                           }else{
-                            echo "<option value='$row->kodeprogdi'>$row->kodeprogdi</option>";
+                            echo "<option value='$row->kodeprogdi'>$row->progdi</option>";
                           }
                         }
                         $mysqli->close();
