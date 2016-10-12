@@ -66,22 +66,88 @@
   <?php
   require_once('../config.php');
 
+
+function getKodesiswa($kdsw_val){
+  $mysqli = openConnection();
+  $sql = "SELECT * FROM datasiswa_n10020 where kodesiswa='$kdsw_val'";
+  $result = $mysqli->query($sql);
+  while($row = $result->fetch_object()){
+    if($kdsw_val === $row->kodesiswa){
+      $hasil = $row->kodesiswa;
+      return $hasil;
+    }
+  }
+}
+function getNama($kdsw_val){
+  $mysqli = openConnection();
+  $sql = "SELECT * FROM datasiswa_n10020 where nama='$kdsw_val'";
+  $result = $mysqli->query($sql);
+  while($row = $result->fetch_object()){
+    if($kdsw_val === $row->nama){
+      $hasil = $row->nama;
+      return $hasil;
+    }
+  }
+}
+
+function getAlamat($kdsw_val){
+  $mysqli = openConnection();
+  $sql = "SELECT * FROM datasiswa_n10020 where alamat='$kdsw_val'";
+  $result = $mysqli->query($sql);
+  while($row = $result->fetch_object()){
+    if($kdsw_val === $row->alamat){
+      $hasil = $row->alamat;
+      return $hasil;
+    }
+  }
+}
+
+function getProgdi($kdsw_val){
+  $mysqli = openConnection();
+  $sql = "SELECT * FROM progdi_n10020 where progdi='$kdsw_val'";
+  $result = $mysqli->query($sql);
+  while($row = $result->fetch_object()){
+    if($kdsw_val === $row->progdi){
+      $hasil = $row->progdi;
+      return $hasil;
+    }
+  }
+}
+
+function getKota($kdsw_val){
+  $mysqli = openConnection();
+  $sql = "SELECT * FROM kota_15n10020 where kota='$kdsw_val'";
+  $result = $mysqli->query($sql);
+  while($row = $result->fetch_object()){
+    if($kdsw_val === $row->kota){
+      $hasil = $row->kota;
+      return $hasil;
+    }
+  }
+}
+
+
   function showTable(){
     $mysqli = openConnection();
     $sql = "SELECT datasiswa_n10020.kodesiswa, datasiswa_n10020.nama, datasiswa_n10020.alamat, kota_15n10020.kota, progdi_n10020.progdi
     FROM datasiswa_n10020, kota_15n10020, progdi_n10020
     WHERE kota_15n10020.kodekota=datasiswa_n10020.kodekota
     AND progdi_n10020.kodeprogdi=datasiswa_n10020.kodeprogdi";
-    
+
     $result = $mysqli->query($sql);
     while($row = $result->fetch_object()){
+    $kodecinta_siswa = getKodesiswa($row->kodesiswa);
+    $kodecinta_nama = getNama($row->nama);
+    $kodecinta_alamat = getAlamat($row->alamat);
+    $kodecinta_kota = getKota($row->kota);
+    $kodecinta_progdi = getProgdi($row->progdi);
     echo "
           <tr>
-          <td>$row->kodesiswa</td>
-          <td>$row->nama</td>
-          <td>$row->alamat</td>
-          <td>$row->kota</td>
-          <td>$row->progdi</td></tr>
+          <td>$kodecinta_siswa</td>
+          <td>$kodecinta_nama</td>
+          <td>$kodecinta_alamat</td>
+          <td>$kodecinta_kota</td>
+          <td>$kodecinta_progdi</td></tr>
         ";
       }
     }
