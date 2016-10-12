@@ -67,23 +67,96 @@
   <?php
   require_once('../config.php');
 
+  function getKodeSiswa($val){
+    $mysqli = openConnection();
+    $sql = "SELECT * FROM datasiswa_n10020 where kodesiswa='$val'";
+    $result = $mysqli->query($sql);
+    while($row = $result->fetch_object()){
+      if($val === $row->kodesiswa){
+        $hasil = $row->kodesiswa;
+        return $hasil;
+      }
+    }
+  }
+  function getNama($val){
+    $mysqli = openConnection();
+    $sql = "SELECT * FROM datasiswa_n10020 where nama='$val'";
+    $result = $mysqli->query($sql);
+    while($row = $result->fetch_object()){
+      if($val === $row->nama){
+        $hasil = $row->nama;
+        return $hasil;
+      }
+    }
+  }
+  function getTahun($val){
+    $mysqli = openConnection();
+    $sql = "SELECT * FROM krs_n10020 where tahun='$val'";
+    $result = $mysqli->query($sql);
+    while($row = $result->fetch_object()){
+      if($val === $row->tahun){
+        $hasil = $row->tahun;
+        return $hasil;
+      }
+    }
+  }
+  function getSmt($val){
+    $mysqli = openConnection();
+    $sql = "SELECT * FROM krs_n10020 where smt='$val'";
+    $result = $mysqli->query($sql);
+    while($row = $result->fetch_object()){
+      if($val === $row->smt){
+        $hasil = $row->smt;
+        return $hasil;
+      }
+    }
+  }
+  function getKodeMK($val){
+    $mysqli = openConnection();
+    $sql = "SELECT * FROM matakuliah_n10020 where kodemk='$val'";
+    $result = $mysqli->query($sql);
+    while($row = $result->fetch_object()){
+      if($val === $row->kodemk){
+        $hasil = $row->kodemk;
+        return $hasil;
+      }
+    }
+  }
+  function getNamaMK($val){
+    $mysqli = openConnection();
+    $sql = "SELECT * FROM matakuliah_n10020 where namamk='$val'";
+    $result = $mysqli->query($sql);
+    while($row = $result->fetch_object()){
+      if($val === $row->namamk){
+        $hasil = $row->namamk;
+        return $hasil;
+      }
+    }
+  }
+
   function showTable(){
     $mysqli = openConnection();
     $sql = "SELECT datasiswa_n10020.kodesiswa, datasiswa_n10020.nama, krs_n10020.tahun, krs_n10020.smt,matakuliah_n10020.kodemk, matakuliah_n10020.namamk
     FROM datasiswa_n10020, krs_n10020, matakuliah_n10020
     WHERE datasiswa_n10020.kodesiswa=krs_n10020.kodesiswa
-    AND matakuliah_n10020.kodemk=krs_n10020.kodemk";
+    AND matakuliah_n10020.kodemk=krs_n10020.kodemk ";
 
     $result = $mysqli->query($sql);
     while($row = $result->fetch_object()){
+      $kodesiswa = getKodeSiswa($row->kodesiswa);
+      $nama = getNama($row->nama);
+      $tahun = getTahun($row->tahun);
+      $smt = getSmt($row->smt);
+      $kdmk = getKodeMK($row->kodemk);
+      $mk = getNamaMK($row->namamk);
     echo "
           <tr>
-          <td>$row->kodesiswa</td>
-          <td>$row->nama</td>
-          <td>$row->tahun</td>
-          <td>$row->smt</td>
-          <td>$row->kodemk</td>
-          <td>$row->namamk</td></tr>
+          <td>$kodesiswa</td>
+          <td>$nama</td>
+          <td>$tahun</td>
+          <td>$smt</td>
+          <td>$kdmk</td>
+          <td>$mk</td></tr>
         ";
       }
     }

@@ -37,6 +37,16 @@
                  <li><a href="inputprodgi.php">KRS</a></li>
                </ul>
              </li>
+
+             <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tampil</a>
+             <ul class="dropdown-menu">
+               <li><a href="/soal6"><i class="fa fa-html5 fa-1x"></i>Soal 6</a></li>
+               <li><a href="/soal7">Soal 7</a></li>
+               <li><a href="/soal8">Soal 8</a></li>
+             </ul>
+           </li>
+
                </ul>
              </div>
            </div>
