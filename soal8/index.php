@@ -44,7 +44,7 @@
           <ul class="dropdown-menu">
             <li><a href="../soal6/"><i class="fa fa-html5 fa-1x"></i>Soal 6</a></li>
             <li><a href="../soal7/">Soal 7</a></li>
-            <li><a href="#">Soal 8</a></li>
+            <li><a href="../soal8/">Soal 8</a></li>
           </ul>
         </li>
             </ul>
@@ -54,34 +54,36 @@
 
   <div class="container">
     <div class="page-header">
-      <h1>SOAL 7</h1>
+      <h1>SOAL 8</h1>
     </div>
     <table class="table table-bordered table-responsive table-hover">
       <tr><th>Kode Siswa</th>
       <th>Nama</th>
-      <th>Alamat</th>
-      <th>kota</th>
-      <th>Progdi</th></tr>
+      <th>Tahun</th>
+      <th>Semester</th>
+      <th>Kode MK</th>
+      <th>Nama MK</th></tr>
 
   <?php
   require_once('../config.php');
 
   function showTable(){
     $mysqli = openConnection();
-    $sql = "SELECT datasiswa_n10020.kodesiswa, datasiswa_n10020.nama, datasiswa_n10020.alamat, kota_15n10020.kota, progdi_n10020.progdi
-    FROM datasiswa_n10020, kota_15n10020, progdi_n10020
-    WHERE kota_15n10020.kodekota=datasiswa_n10020.kodekota
-    AND progdi_n10020.kodeprogdi=datasiswa_n10020.kodeprogdi";
-    
+    $sql = "SELECT datasiswa_n10020.kodesiswa, datasiswa_n10020.nama, krs_n10020.tahun, krs_n10020.smt,matakuliah_n10020.kodemk, matakuliah_n10020.namamk
+    FROM datasiswa_n10020, krs_n10020, matakuliah_n10020
+    WHERE datasiswa_n10020.kodesiswa=krs_n10020.kodesiswa
+    AND matakuliah_n10020.kodemk=krs_n10020.kodemk";
+
     $result = $mysqli->query($sql);
     while($row = $result->fetch_object()){
     echo "
           <tr>
           <td>$row->kodesiswa</td>
           <td>$row->nama</td>
-          <td>$row->alamat</td>
-          <td>$row->kota</td>
-          <td>$row->progdi</td></tr>
+          <td>$row->tahun</td>
+          <td>$row->smt</td>
+          <td>$row->kodemk</td>
+          <td>$row->namamk</td></tr>
         ";
       }
     }
